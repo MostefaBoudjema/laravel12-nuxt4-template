@@ -2748,7 +2748,7 @@ const _0uhVd5kBGMxsAo3P2TKtVB_eTNfWQUBBpzbapPBQwq8 = defineNitroPlugin(async (ni
     const localeSegment = detector.route(event.path);
     const pathLocale = isSupportedLocale(localeSegment) && localeSegment || void 0;
     const path = (pathLocale && url.pathname.slice(pathLocale.length + 1)) ?? url.pathname;
-    if (!url.pathname.includes("/_i18n/9SKUeVt5") && !isExistingNuxtRoute(path)) {
+    if (!url.pathname.includes("/_i18n/K9HV2skH") && !isExistingNuxtRoute(path)) {
       return;
     }
     const resolved = resolveRedirectPath(event, path, pathLocale, ctx.vueI18nOptions.defaultLocale, detector);

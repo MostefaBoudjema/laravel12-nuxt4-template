@@ -25,8 +25,8 @@ const users = computed(() => usersData.value?.data || [])
   <div class="space-y-6">
     <div class="flex justify-between items-center">
       <div>
-        <h2 class="text-2xl font-bold text-slate-800">System Users</h2>
-        <p class="text-slate-500">Manage all registered users and their permissions</p>
+        <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200">System Users</h2>
+        <p class="text-slate-500 dark:text-slate-400">Manage all registered users and their permissions</p>
       </div>
       <button @click="refresh" class="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-indigo-700 transition-all shadow-md active:scale-95">
         <fa icon="cog" :class="{ 'animate-spin': pending }" />
@@ -34,7 +34,7 @@ const users = computed(() => usersData.value?.data || [])
       </button>
     </div>
 
-    <div v-if="error" class="bg-rose-50 border border-rose-100 p-6 rounded-2xl text-rose-600 flex items-center gap-4">
+    <div v-if="error" class="bg-rose-50 dark:bg-rose-950 border border-rose-100 dark:border-rose-900 p-6 rounded-2xl text-rose-600 dark:text-rose-400 flex items-center gap-4">
       <fa icon="exclamation-triangle" class="text-xl" />
       <div>
         <p class="font-bold">Failed to load users</p>
@@ -42,41 +42,41 @@ const users = computed(() => usersData.value?.data || [])
       </div>
     </div>
 
-    <div v-else class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+    <div v-else class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
       <table class="w-full text-left">
-        <thead class="bg-slate-50 border-b border-slate-100">
+        <thead class="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
           <tr>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 uppercase tracking-wider">User</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 uppercase tracking-wider">Roles</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 uppercase tracking-wider">Permissions</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 uppercase tracking-wider">Joined</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 uppercase tracking-wider">Actions</th>
+            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">User</th>
+            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Roles</th>
+            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Permissions</th>
+            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Joined</th>
+            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-50">
-          <tr v-for="user in users" :key="user.id" class="hover:bg-slate-50/50 transition-colors">
+        <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
+          <tr v-for="user in users" :key="user.id" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
             <td class="px-8 py-6">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-700">
+                <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center font-bold text-indigo-700 dark:text-indigo-300">
                   {{ user.name.charAt(0) }}
                 </div>
                 <div>
-                  <p class="font-bold text-slate-800">{{ user.name }}</p>
-                  <p class="text-xs text-slate-500">{{ user.email }}</p>
+                  <p class="font-bold text-slate-800 dark:text-slate-200">{{ user.name }}</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">{{ user.email }}</p>
                 </div>
               </div>
             </td>
             <td class="px-8 py-6">
               <div class="flex flex-wrap gap-2">
-                <span v-for="role in user.roles" :key="role" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <span v-for="role in user.roles" :key="role" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
                   {{ role }}
                 </span>
               </div>
             </td>
             <td class="px-8 py-6">
-              <p class="text-xs text-slate-500 max-w-xs truncate">{{ user.permissions.join(', ') }}</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xs truncate">{{ user.permissions.join(', ') }}</p>
             </td>
-            <td class="px-8 py-6 text-sm text-slate-500">
+            <td class="px-8 py-6 text-sm text-slate-500 dark:text-slate-400">
               {{ new Date(user.created_at).toLocaleDateString() }}
             </td>
             <td class="px-8 py-6">
@@ -86,7 +86,7 @@ const users = computed(() => usersData.value?.data || [])
             </td>
           </tr>
           <tr v-if="users.length === 0 && !pending">
-            <td colspan="5" class="px-8 py-20 text-center text-slate-400">
+            <td colspan="5" class="px-8 py-20 text-center text-slate-400 dark:text-slate-500">
               No users found.
             </td>
           </tr>
@@ -94,8 +94,8 @@ const users = computed(() => usersData.value?.data || [])
       </table>
       
       <div v-if="pending" class="p-12 flex justify-center items-center gap-4">
-        <fa icon="cog" class="text-indigo-600 text-2xl animate-spin" />
-        <span class="font-medium text-slate-500">Loading user database...</span>
+        <fa icon="cog" class="text-indigo-600 dark:text-indigo-400 text-2xl animate-spin" />
+        <span class="font-medium text-slate-500 dark:text-slate-400">Loading user database...</span>
       </div>
     </div>
   </div>
