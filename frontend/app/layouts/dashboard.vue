@@ -49,7 +49,7 @@ const filteredLinks = computed(() => {
           :to="link.to" 
           @click="isSidebarOpen = false"
           class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-indigo-50 dark:hover:bg-white/5 group hover:text-indigo-600 dark:hover:text-indigo-400 font-medium" 
-          :class="{'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20 hover:text-white dark:hover:text-white': $route.path === link.to}"
+          :class="{'bg-indigo-600 text-white shadow-lg hover:text-white dark:hover:text-white': $route.path === link.to}"
         >
           <fa :icon="link.icon" />
           <span>{{ t(link.label) }}</span>
@@ -109,6 +109,6 @@ body {
 }
 
 .router-link-active:not(#logout) {
-  @apply bg-indigo-600 text-white shadow-lg shadow-indigo-100;
+  @apply bg-indigo-600 text-white shadow-lg shadow-indigo-500/20 dark:shadow-none;
 }
 </style>

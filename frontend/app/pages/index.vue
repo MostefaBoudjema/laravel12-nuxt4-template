@@ -14,13 +14,14 @@ const auth = useAuthStore()
 // Staggered reveal for stats
 const statsContainer = ref()
 onMounted(() => {
-  gsap.from('.stat-card', {
+  gsap.from(statsContainer.value.querySelectorAll('.stat-card'), {
     opacity: 0,
     y: 20,
     stagger: 0.05,
     duration: 0.4,
     ease: 'power2.out',
-    delay: 0.1
+    delay: 0.1,
+    clearProps: 'all' // This removes the inline styles after animation finishes
   })
 })
 
