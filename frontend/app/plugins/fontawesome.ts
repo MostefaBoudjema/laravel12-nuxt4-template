@@ -14,7 +14,13 @@ import {
   faMoon,
   faChevronDown,
   faBars,
-  faTimes
+  faTimes,
+  faPlus,
+  faEdit,
+  faTrash,
+  faShieldAlt,
+  faKey,
+  faSync
 } from '@fortawesome/free-solid-svg-icons'
 
 // This is important, we are going to let Nuxt handle the CSS
@@ -34,7 +40,13 @@ library.add(
   faMoon,
   faChevronDown,
   faBars,
-  faTimes
+  faTimes,
+  faPlus,
+  faEdit,
+  faTrash,
+  faShieldAlt,
+  faKey,
+  faSync
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

@@ -23,6 +23,12 @@ Route::middleware('auth:sanctum')->group(function () {
     // Admin only
     Route::middleware('role:admin')->group(function () {
         Route::get('/users', [UserController::class, 'index']);
+        
+        // Roles CRUD
+        Route::apiResource('roles', \App\Http\Controllers\Api\Admin\RoleController::class);
+        
+        // Permissions CRUD
+        Route::apiResource('permissions', \App\Http\Controllers\Api\Admin\PermissionController::class);
     });
 
     // Admin + Manager
