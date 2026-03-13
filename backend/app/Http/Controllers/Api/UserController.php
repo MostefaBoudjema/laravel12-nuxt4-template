@@ -11,11 +11,19 @@ class UserController extends Controller
     /**
      * Get all users (admin only).
      */
-    public function index(): JsonResponse
+    public function index(\Illuminate\Http\Request $request): JsonResponse
     {
-        $users = User::with('roles', 'permissions')
-            ->select(['id', 'name', 'email', 'created_at'])
-            ->get()
+        $query = User::with('roles', 'permissions')
+            ->select(['id', 'name', 'email', 'created_at']);
+
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $users = $query->get()
             ->map(fn(User $user) => [
                 'id'          => $user->id,
                 'name'        => $user->name,

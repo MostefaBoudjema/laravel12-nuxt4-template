@@ -12,9 +12,13 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = Permission::all();
+        $query = Permission::query();
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        $permissions = $query->get();
         return response()->json(['data' => $permissions]);
     }
 

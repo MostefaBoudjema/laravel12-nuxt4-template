@@ -120,5 +120,8 @@
   "user_updated": "User updated successfully",
   "user_deleted": "User deleted successfully",
   "select_roles": "Select Roles",
-  "keep_empty_password": "Leave empty to keep current password"
+  "keep_empty_password": "Leave empty to keep current password",
+  "search_users": "Search users...",
+  "search_roles": "Search roles...",
+  "search_permissions": "Search permissions..."
 }

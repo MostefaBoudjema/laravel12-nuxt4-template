@@ -18,11 +18,35 @@ onMounted(() => {
   }
 })
 
-const { data: reportsData, pending, error } = await useFetch<any>('/reports', {
+// Search and Debounce Logic
+const searchQuery = ref('')
+const deferredSearch = ref('')
+let debounceTimeout: any = null
+
+const { data: reportsData, pending, refresh } = await useFetch<any>('/reports', {
   baseURL: config.public.apiBase,
+  query: { search: deferredSearch },
   headers: {
     Authorization: `Bearer ${auth.token}`
   }
+})
+
+// Update search results only 1s after typing stops
+watch(searchQuery, (newVal) => {
+  if (debounceTimeout) clearTimeout(debounceTimeout)
+  
+  if (newVal.trim() === '') {
+    deferredSearch.value = ''
+    return
+  }
+
+  debounceTimeout = setTimeout(() => {
+    deferredSearch.value = newVal.trim()
+  }, 1000)
+})
+
+onUnmounted(() => {
+  if (debounceTimeout) clearTimeout(debounceTimeout)
 })
 
 const summary = computed(() => reportsData.value?.data?.summary || {})
@@ -36,8 +60,26 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
         <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200 tracking-tight">{{ t('system_statistics') }}</h2>
         <p class="text-slate-500 dark:text-slate-400">{{ t('real_time_breakdown') }}</p>
       </div>
-      <div class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
-        {{ t('updated') }}: {{ reportsData?.data?.generated_at ? new Date(reportsData.data.generated_at).toLocaleTimeString() : '...' }}
+      <div class="flex items-center gap-4">
+        <div class="relative group">
+          <fa icon="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
+          <input 
+            v-model="searchQuery"
+            type="text" 
+            :placeholder="t('search_users') || 'Search users...'"
+            class="pl-11 pr-10 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs focus:ring-2 focus:ring-indigo-500 outline-none w-48 transition-all shadow-sm"
+          />
+          <button 
+            v-if="searchQuery" 
+            @click="searchQuery = ''"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-rose-500 transition-colors shrink-0"
+          >
+            <fa icon="times" />
+          </button>
+        </div>
+        <div class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+          {{ t('updated') }}: {{ reportsData?.data?.generated_at ? new Date(reportsData.data.generated_at).toLocaleTimeString() : '...' }}
+        </div>
       </div>
     </div>
 

@@ -120,5 +120,8 @@
   "user_updated": "Utilisateur mis à jour avec succès",
   "user_deleted": "Utilisateur supprimé avec succès",
   "select_roles": "Sélectionner les Rôles",
-  "keep_empty_password": "Laisser vide pour conserver le mot de passe actuel"
+  "keep_empty_password": "Laisser vide pour conserver le mot de passe actuel",
+  "search_users": "Rechercher des utilisateurs...",
+  "search_roles": "Rechercher des rôles...",
+  "search_permissions": "Rechercher des permissions..."
 }
