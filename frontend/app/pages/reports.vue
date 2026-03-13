@@ -4,9 +4,10 @@ import { useAuthStore } from '~/stores/auth'
 definePageMeta({
   layout: 'dashboard',
   middleware: 'auth',
-  title: 'Analytical Reports'
+  title: 'analytical_reports'
 })
 
+const { t } = useI18n()
 const auth = useAuthStore()
 const config = useRuntimeConfig()
 
@@ -32,11 +33,11 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
   <div class="space-y-8">
     <div class="flex justify-between items-end">
       <div>
-        <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200 tracking-tight">System Statistics</h2>
-        <p class="text-slate-500 dark:text-slate-400">Real-time breakdown of your application health and growth</p>
+        <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200 tracking-tight">{{ t('system_statistics') }}</h2>
+        <p class="text-slate-500 dark:text-slate-400">{{ t('real_time_breakdown') }}</p>
       </div>
       <div class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
-        Updated: {{ reportsData?.data?.generated_at ? new Date(reportsData.data.generated_at).toLocaleTimeString() : '...' }}
+        {{ t('updated') }}: {{ reportsData?.data?.generated_at ? new Date(reportsData.data.generated_at).toLocaleTimeString() : '...' }}
       </div>
     </div>
 
@@ -48,7 +49,7 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
         <p class="text-4xl font-extrabold text-slate-800 dark:text-slate-100">{{ val }}</p>
         <div class="mt-4 flex items-center gap-2 text-emerald-500 font-bold text-xs">
           <fa icon="check-circle" />
-          <span>Active & Verified</span>
+          <span>{{ t('active_verified') }}</span>
         </div>
       </div>
     </div>
@@ -57,7 +58,7 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
       <!-- Recent Registrations -->
       <div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
         <div class="px-8 py-6 border-b border-slate-50 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/50 flex justify-between items-center">
-          <h3 class="font-bold text-slate-800 dark:text-slate-200">Recent Registrations</h3>
+          <h3 class="font-bold text-slate-800 dark:text-slate-200">{{ t('recent_registrations') }}</h3>
         </div>
         <div class="p-0">
           <div v-for="user in recent" :key="user.id" class="px-8 py-5 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-b last:border-0 border-slate-50 dark:border-slate-800">
@@ -80,11 +81,11 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
 
       <!-- Quick Analysis -->
       <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 rounded-3xl p-8 text-white">
-        <h3 class="font-bold text-xl mb-6 text-slate-800 dark:text-slate-200">Growth Analysis</h3>
+        <h3 class="font-bold text-xl mb-6 text-slate-800 dark:text-slate-200">{{ t('growth_analysis') }}</h3>
         <div class="space-y-8">
           <div>
             <div class="flex justify-between mb-2">
-              <span class="text-sm text-slate-400 dark:text-slate-300">Retention Rate</span>
+              <span class="text-sm text-slate-400 dark:text-slate-300">{{ t('retention_rate') }}</span>
               <span class="text-sm font-bold text-white">84%</span>
             </div>
             <div class="w-full bg-white/10 dark:bg-white/5 h-2 rounded-full overflow-hidden">
@@ -93,7 +94,7 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
           </div>
           <div>
             <div class="flex justify-between mb-2">
-              <span class="text-sm text-slate-400 dark:text-slate-300">API Uptime</span>
+              <span class="text-sm text-slate-400 dark:text-slate-300">{{ t('api_uptime') }}</span>
               <span class="text-sm font-bold text-white">99.9%</span>
             </div>
             <div class="w-full bg-white/10 dark:bg-white/5 h-2 rounded-full overflow-hidden">
@@ -102,7 +103,7 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
           </div>
           <div>
             <div class="flex justify-between mb-2">
-              <span class="text-sm text-slate-400 dark:text-slate-300">Server Load</span>
+              <span class="text-sm text-slate-400 dark:text-slate-300">{{ t('server_load') }}</span>
               <span class="text-sm font-bold text-white">12%</span>
             </div>
             <div class="w-full bg-white/10 dark:bg-white/5 h-2 rounded-full overflow-hidden">
@@ -113,7 +114,7 @@ const recent = computed(() => reportsData.value?.data?.recent_registrations || [
         
         <div class="mt-12 p-6 rounded-2xl bg-white/5 dark:bg-white/10 border border-white/10 dark:border-white/20">
            <p class="text-sm text-white/60 dark:text-white/70 leading-relaxed italic">
-             "The system is currently operating at peak efficiency. No immediate scaling required for the current user load."
+             "{{ t('peak_efficiency_msg') }}"
            </p>
         </div>
       </div>

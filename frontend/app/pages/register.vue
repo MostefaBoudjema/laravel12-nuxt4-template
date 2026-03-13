@@ -79,25 +79,25 @@ const handleRegister = async () => {
 
         <form @submit.prevent="handleRegister" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
           <div ref="el => regItems[0] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">Full Name</label>
+            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">{{ t('full_name') }}</label>
             <input v-model="form.name" type="text" placeholder="John Doe" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-5 focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white" required />
             <p v-if="errors.name" class="text-rose-500 text-xs mt-2 ml-1">{{ errors.name[0] }}</p>
           </div>
 
           <div ref="el => regItems[1] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">Email Address</label>
-            <input v-model="form.email" type="email" placeholder="john@example.com" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-5 focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white" required />
+            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">{{ t('email_address') }}</label>
+            <input v-model="form.email" type="email" placeholder="email@example.com" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-5 focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white" required />
             <p v-if="errors.email" class="text-rose-500 text-xs mt-2 ml-1">{{ errors.email[0] }}</p>
           </div>
 
           <div ref="el => regItems[2] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">Password</label>
+            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">{{ t('password') }}</label>
             <input v-model="form.password" type="password" placeholder="••••••••" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-5 focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white" required />
             <p v-if="errors.password" class="text-rose-500 text-xs mt-2 ml-1">{{ errors.password[0] }}</p>
           </div>
 
           <div ref="el => regItems[3] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">Confirm Password</label>
+            <label class="block text-sm font-semibold mb-2 ml-1 opacity-80">{{ t('confirm_password') }}</label>
             <input v-model="form.password_confirmation" type="password" placeholder="••••••••" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-5 focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white" required />
           </div>
 
@@ -108,12 +108,12 @@ const handleRegister = async () => {
               class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-2xl font-bold active:scale-95 transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/20"
             >
               <fa v-if="loading" icon="cog" class="animate-spin text-lg" />
-              <span class="text-lg">{{ loading ? 'Creating account...' : t('register') }}</span>
+              <span class="text-lg">{{ loading ? t('creating_account') : t('register') }}</span>
             </button>
           </div>
 
           <div class="md:col-span-2 text-center text-sm text-slate-500 dark:text-white/40 pt-4">
-            Already have an account? <NuxtLink to="/login" class="text-indigo-600 dark:text-white font-bold hover:underline transition-all">Sign In</NuxtLink>
+            {{ t('already_have_account') }} <NuxtLink to="/login" class="text-indigo-600 dark:text-white font-bold hover:underline transition-all">{{ t('sign_in') }}</NuxtLink>
           </div>
         </form>
 

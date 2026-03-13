@@ -35,7 +35,7 @@ const filteredLinks = computed(() => {
           <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
             <fa icon="dashboard" class="text-white" />
           </div>
-          <span class="text-xl font-bold tracking-tight dark:text-white text-slate-800">SaaS App</span>
+          <span class="text-xl font-bold tracking-tight dark:text-white text-slate-800">{{ t('saas_app') }}</span>
         </div>
         <button @click="isSidebarOpen = false" class="lg:hidden p-2 text-slate-400">
           <fa icon="times" />
@@ -73,7 +73,7 @@ const filteredLinks = computed(() => {
             <fa icon="bars" />
           </button>
           <h1 class="text-xl font-semibold dark:text-white text-slate-800 hidden sm:block">
-            {{ $route.meta.title ? t($route.meta.title.toString().toLowerCase()) : t('welcome') }}
+            {{ $route.meta.title ? t($route.meta.title.toString().toLowerCase().replace(/\s+/g, '_')) : t('welcome') }}
           </h1>
         </div>
 

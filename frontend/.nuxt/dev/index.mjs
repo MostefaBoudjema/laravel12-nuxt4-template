@@ -2179,7 +2179,7 @@ async function getLocaleMessagesMerged(locale, loaders = []) {
   return merged;
 }
 
-var welcome$1 = "Welcome to Lightweight SaaS";
+var welcome$1 = "Welcome back";
 var login$1 = "Login";
 var register$1 = "Register";
 var dashboard$1 = "Dashboard";
@@ -2192,6 +2192,70 @@ var french$1 = "French";
 var users$1 = "Users";
 var reports$1 = "Reports";
 var settings$1 = "Settings";
+var saas_app$1 = "SaaS App";
+var copy_right$1 = "© 2026 Lightweight SaaS";
+var welcome_title$1 = "Welcome back, {name}! ✨";
+var welcome_subtitle$1 = "Everything looks great today. You have full access to your resources and can manage your data from the sidebar.";
+var new_project$1 = "New Project";
+var documentation$1 = "Documentation";
+var total_revenue$1 = "Total Revenue";
+var active_users$1 = "Active Users";
+var monthly_sales$1 = "Monthly Sales";
+var system_uptime$1 = "System Uptime";
+var activity_feed$1 = "Activity Feed";
+var view_all$1 = "View All";
+var action_performed$1 = "Action performed by system";
+var hours_ago$1 = "2 hours ago";
+var login_subtitle$1 = "Enter your credentials to access your account";
+var email_address$1 = "Email Address";
+var password$1 = "Password";
+var authenticating$1 = "Authenticating...";
+var dont_have_account$1 = "Don't have an account?";
+var create_one$1 = "Create one";
+var full_name$1 = "Full Name";
+var confirm_password$1 = "Confirm Password";
+var creating_account$1 = "Creating account...";
+var already_have_account$1 = "Already have an account?";
+var sign_in$1 = "Sign In";
+var system_statistics$1 = "System Statistics";
+var real_time_breakdown$1 = "Real-time breakdown of your application health and growth";
+var updated$1 = "Updated";
+var active_verified$1 = "Active & Verified";
+var recent_registrations$1 = "Recent Registrations";
+var growth_analysis$1 = "Growth Analysis";
+var retention_rate$1 = "Retention Rate";
+var api_uptime$1 = "API Uptime";
+var server_load$1 = "Server Load";
+var peak_efficiency_msg$1 = "The system is currently operating at peak efficiency. No immediate scaling required for the current user load.";
+var display_name$1 = "Display Name";
+var saving_changes$1 = "Saving Changes...";
+var profile_updated$1 = "Profile Updated!";
+var save_progress$1 = "Save Progress";
+var last_updated$1 = "Last updated";
+var security_access$1 = "Security Access";
+var security_msg$1 = "Your account has special privileges granted based on your role. Access to sensitive reports and administrative panels is logged.";
+var audit_logic$1 = "Audit Logic";
+var system_integration$1 = "System Integration";
+var integration_msg$1 = "Connect your workspace with third-party providers using our latest API endpoints.";
+var developer_portal$1 = "Developer Portal";
+var unauthorized_access$1 = "Unauthorized Access";
+var unauthorized_msg$1 = "Sorry, but you do not have the required role or permissions to view this section of the application. Please contact your system administrator if you believe this is a mistake.";
+var back_to_dashboard$1 = "Back to Dashboard";
+var go_back$1 = "Go Back";
+var system_users$1 = "System Users";
+var manage_users$1 = "Manage all registered users and their permissions";
+var refresh_data$1 = "Refresh Data";
+var failed_load_users$1 = "Failed to load users";
+var user_header$1 = "User";
+var roles_header$1 = "Roles";
+var permissions_header$1 = "Permissions";
+var joined_header$1 = "Joined";
+var actions_header$1 = "Actions";
+var no_users_found$1 = "No users found.";
+var loading_users$1 = "Loading user database...";
+var profile_settings$1 = "Profile Settings";
+var analytical_reports$1 = "Analytical Reports";
+var user_management$1 = "User Management";
 const locale_en_46json_ea8ad986 = {
 	welcome: welcome$1,
 	login: login$1,
@@ -2205,10 +2269,74 @@ const locale_en_46json_ea8ad986 = {
 	french: french$1,
 	users: users$1,
 	reports: reports$1,
-	settings: settings$1
+	settings: settings$1,
+	saas_app: saas_app$1,
+	copy_right: copy_right$1,
+	welcome_title: welcome_title$1,
+	welcome_subtitle: welcome_subtitle$1,
+	new_project: new_project$1,
+	documentation: documentation$1,
+	total_revenue: total_revenue$1,
+	active_users: active_users$1,
+	monthly_sales: monthly_sales$1,
+	system_uptime: system_uptime$1,
+	activity_feed: activity_feed$1,
+	view_all: view_all$1,
+	action_performed: action_performed$1,
+	hours_ago: hours_ago$1,
+	login_subtitle: login_subtitle$1,
+	email_address: email_address$1,
+	password: password$1,
+	authenticating: authenticating$1,
+	dont_have_account: dont_have_account$1,
+	create_one: create_one$1,
+	full_name: full_name$1,
+	confirm_password: confirm_password$1,
+	creating_account: creating_account$1,
+	already_have_account: already_have_account$1,
+	sign_in: sign_in$1,
+	system_statistics: system_statistics$1,
+	real_time_breakdown: real_time_breakdown$1,
+	updated: updated$1,
+	active_verified: active_verified$1,
+	recent_registrations: recent_registrations$1,
+	growth_analysis: growth_analysis$1,
+	retention_rate: retention_rate$1,
+	api_uptime: api_uptime$1,
+	server_load: server_load$1,
+	peak_efficiency_msg: peak_efficiency_msg$1,
+	display_name: display_name$1,
+	saving_changes: saving_changes$1,
+	profile_updated: profile_updated$1,
+	save_progress: save_progress$1,
+	last_updated: last_updated$1,
+	security_access: security_access$1,
+	security_msg: security_msg$1,
+	audit_logic: audit_logic$1,
+	system_integration: system_integration$1,
+	integration_msg: integration_msg$1,
+	developer_portal: developer_portal$1,
+	unauthorized_access: unauthorized_access$1,
+	unauthorized_msg: unauthorized_msg$1,
+	back_to_dashboard: back_to_dashboard$1,
+	go_back: go_back$1,
+	system_users: system_users$1,
+	manage_users: manage_users$1,
+	refresh_data: refresh_data$1,
+	failed_load_users: failed_load_users$1,
+	user_header: user_header$1,
+	roles_header: roles_header$1,
+	permissions_header: permissions_header$1,
+	joined_header: joined_header$1,
+	actions_header: actions_header$1,
+	no_users_found: no_users_found$1,
+	loading_users: loading_users$1,
+	profile_settings: profile_settings$1,
+	analytical_reports: analytical_reports$1,
+	user_management: user_management$1
 };
 
-var welcome = "Bienvenue sur Lightweight SaaS";
+var welcome = "Bienvenue";
 var login = "Connexion";
 var register = "Inscription";
 var dashboard = "Tableau de bord";
@@ -2221,6 +2349,70 @@ var french = "Français";
 var users = "Utilisateurs";
 var reports = "Rapports";
 var settings = "Paramètres";
+var saas_app = "Application SaaS";
+var copy_right = "© 2026 Lightweight SaaS";
+var welcome_title = "Bon retour, {name} ! ✨";
+var welcome_subtitle = "Tout semble parfait aujourd'hui. Vous avez un accès complet à vos ressources et pouvez gérer vos données depuis la barre latérale.";
+var new_project = "Nouveau Projet";
+var documentation = "Documentation";
+var total_revenue = "Revenu Total";
+var active_users = "Utilisateurs Actifs";
+var monthly_sales = "Ventes Mensuelles";
+var system_uptime = "Disponibilité du Système";
+var activity_feed = "Flux d'Activité";
+var view_all = "Voir Tout";
+var action_performed = "Action effectuée par le système";
+var hours_ago = "Il y a 2 heures";
+var login_subtitle = "Entrez vos identifiants pour accéder à votre compte";
+var email_address = "Adresse E-mail";
+var password = "Mot de passe";
+var authenticating = "Authentification...";
+var dont_have_account = "Vous n'avez pas de compte ?";
+var create_one = "Créez-en un";
+var full_name = "Nom Complet";
+var confirm_password = "Confirmer le mot de passe";
+var creating_account = "Création du compte...";
+var already_have_account = "Vous avez déjà un compte ?";
+var sign_in = "Se connecter";
+var system_statistics = "Statistiques du Système";
+var real_time_breakdown = "Répartition en temps réel de la santé et de la croissance de votre application";
+var updated = "Mis à jour";
+var active_verified = "Actif & Vérifié";
+var recent_registrations = "Inscriptions Récentes";
+var growth_analysis = "Analyse de la Croissance";
+var retention_rate = "Taux de Rétention";
+var api_uptime = "Disponibilité de l'API";
+var server_load = "Charge du Serveur";
+var peak_efficiency_msg = "Le système fonctionne actuellement à son efficacité maximale. Aucune mise à l'échelle immédiate n'est requise pour la charge utilisateur actuelle.";
+var display_name = "Nom d'affichage";
+var saving_changes = "Enregistrement des modifications...";
+var profile_updated = "Profil mis à jour !";
+var save_progress = "Enregistrer la progression";
+var last_updated = "Dernière mise à jour";
+var security_access = "Accès Sécurisé";
+var security_msg = "Votre compte dispose de privilèges spéciaux accordés en fonction de votre rôle. L'accès aux rapports sensibles et aux panneaux d'administration est journalisé.";
+var audit_logic = "Logique d'Audit";
+var system_integration = "Intégration du Système";
+var integration_msg = "Connectez votre espace de travail avec des fournisseurs tiers en utilisant nos derniers points de terminaison d'API.";
+var developer_portal = "Portail Développeur";
+var unauthorized_access = "Accès Non Autorisé";
+var unauthorized_msg = "Désolé, mais vous n'avez pas le rôle ou les permissions requis pour voir cette section de l'application. Veuillez contacter votre administrateur système si vous pensez qu'il s'agit d'une erreur.";
+var back_to_dashboard = "Retour au Tableau de Bord";
+var go_back = "Retour";
+var system_users = "Utilisateurs du Système";
+var manage_users = "Gérez tous les utilisateurs inscrits et leurs permissions";
+var refresh_data = "Actualiser les données";
+var failed_load_users = "Échec du chargement des utilisateurs";
+var user_header = "Utilisateur";
+var roles_header = "Rôles";
+var permissions_header = "Permissions";
+var joined_header = "Inscrit le";
+var actions_header = "Actions";
+var no_users_found = "Aucun utilisateur trouvé.";
+var loading_users = "Chargement de la base de données utilisateurs...";
+var profile_settings = "Paramètres du Profil";
+var analytical_reports = "Rapports Analytiques";
+var user_management = "Gestion des Utilisateurs";
 const locale_fr_46json_5ed30cc0 = {
 	welcome: welcome,
 	login: login,
@@ -2234,7 +2426,71 @@ const locale_fr_46json_5ed30cc0 = {
 	french: french,
 	users: users,
 	reports: reports,
-	settings: settings
+	settings: settings,
+	saas_app: saas_app,
+	copy_right: copy_right,
+	welcome_title: welcome_title,
+	welcome_subtitle: welcome_subtitle,
+	new_project: new_project,
+	documentation: documentation,
+	total_revenue: total_revenue,
+	active_users: active_users,
+	monthly_sales: monthly_sales,
+	system_uptime: system_uptime,
+	activity_feed: activity_feed,
+	view_all: view_all,
+	action_performed: action_performed,
+	hours_ago: hours_ago,
+	login_subtitle: login_subtitle,
+	email_address: email_address,
+	password: password,
+	authenticating: authenticating,
+	dont_have_account: dont_have_account,
+	create_one: create_one,
+	full_name: full_name,
+	confirm_password: confirm_password,
+	creating_account: creating_account,
+	already_have_account: already_have_account,
+	sign_in: sign_in,
+	system_statistics: system_statistics,
+	real_time_breakdown: real_time_breakdown,
+	updated: updated,
+	active_verified: active_verified,
+	recent_registrations: recent_registrations,
+	growth_analysis: growth_analysis,
+	retention_rate: retention_rate,
+	api_uptime: api_uptime,
+	server_load: server_load,
+	peak_efficiency_msg: peak_efficiency_msg,
+	display_name: display_name,
+	saving_changes: saving_changes,
+	profile_updated: profile_updated,
+	save_progress: save_progress,
+	last_updated: last_updated,
+	security_access: security_access,
+	security_msg: security_msg,
+	audit_logic: audit_logic,
+	system_integration: system_integration,
+	integration_msg: integration_msg,
+	developer_portal: developer_portal,
+	unauthorized_access: unauthorized_access,
+	unauthorized_msg: unauthorized_msg,
+	back_to_dashboard: back_to_dashboard,
+	go_back: go_back,
+	system_users: system_users,
+	manage_users: manage_users,
+	refresh_data: refresh_data,
+	failed_load_users: failed_load_users,
+	user_header: user_header,
+	roles_header: roles_header,
+	permissions_header: permissions_header,
+	joined_header: joined_header,
+	actions_header: actions_header,
+	no_users_found: no_users_found,
+	loading_users: loading_users,
+	profile_settings: profile_settings,
+	analytical_reports: analytical_reports,
+	user_management: user_management
 };
 
 // @ts-nocheck
@@ -2748,7 +3004,7 @@ const _0uhVd5kBGMxsAo3P2TKtVB_eTNfWQUBBpzbapPBQwq8 = defineNitroPlugin(async (ni
     const localeSegment = detector.route(event.path);
     const pathLocale = isSupportedLocale(localeSegment) && localeSegment || void 0;
     const path = (pathLocale && url.pathname.slice(pathLocale.length + 1)) ?? url.pathname;
-    if (!url.pathname.includes("/_i18n/K9HV2skH") && !isExistingNuxtRoute(path)) {
+    if (!url.pathname.includes("/_i18n/ELSzE_ni") && !isExistingNuxtRoute(path)) {
       return;
     }
     const resolved = resolveRedirectPath(event, path, pathLocale, ctx.vueI18nOptions.defaultLocale, detector);
@@ -2870,7 +3126,22 @@ _gIECKYZ3TSTc9qBkfCnVn3S20eNcGc9hv7IH7uFpHuQ,
 _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"23ae9-jSrI5ojKACbk3iPCkWAapLceGbI\"",
+    "mtime": "2026-03-13T04:59:45.308Z",
+    "size": 146153,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"8368f-EUCIuNuNo/sfCYz+t+fKhiHWOBA\"",
+    "mtime": "2026-03-13T04:59:45.308Z",
+    "size": 538255,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));

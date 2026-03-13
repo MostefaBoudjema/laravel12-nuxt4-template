@@ -14,7 +14,7 @@ const isMenuOpen = ref(false)
             <fa icon="dashboard" class="text-white text-lg" />
           </div>
           <span class="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-white dark:to-white/60">
-            SaaS App
+            {{ t('saas_app') }}
           </span>
         </div>
 
@@ -69,7 +69,7 @@ const isMenuOpen = ref(false)
     <footer class="py-12 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/50 backdrop-blur-md text-center">
       <div class="max-w-7xl mx-auto px-4">
         <p class="text-slate-500 dark:text-white/40 text-sm">
-          &copy; 2026 Lightweight SaaS. {{ t('welcome') }}.
+          {{ t('copy_right') }}. {{ t('welcome') }}.
         </p>
       </div>
     </footer>

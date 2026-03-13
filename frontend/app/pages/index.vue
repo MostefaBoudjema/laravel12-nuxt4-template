@@ -25,10 +25,10 @@ onMounted(() => {
 })
 
 const stats = [
-  { label: 'Total Revenue', value: '$45,230', icon: 'dashboard', trend: '+12.5%' },
-  { label: 'Active Users', value: '2,450', icon: 'users', trend: '+3.2%' },
-  { label: 'Monthly Sales', value: '842', icon: 'chart-bar', trend: '+8.1%' },
-  { label: 'System Uptime', value: '99.9%', icon: 'cog', trend: '0%' }
+  { label: 'total_revenue', value: '$45,230', icon: 'dashboard', trend: '+12.5%' },
+  { label: 'active_users', value: '2,450', icon: 'users', trend: '+3.2%' },
+  { label: 'monthly_sales', value: '842', icon: 'chart-bar', trend: '+8.1%' },
+  { label: 'system_uptime', value: '99.9%', icon: 'cog', trend: '0%' }
 ]
 </script>
 
@@ -37,13 +37,13 @@ const stats = [
     <!-- Welcome Section -->
     <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-[2rem] p-8 md:p-12 text-white shadow-xl shadow-indigo-500/20 relative overflow-hidden">
       <div class="relative z-10 max-w-2xl">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Welcome back, {{ auth.user?.name }}! ✨</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{{ t('welcome_title', { name: auth.user?.name }) }}</h2>
         <p class="text-indigo-100 text-lg leading-relaxed mb-8 opacity-90">
-          Everything looks great today. You have full access to your resources and can manage your data from the sidebar.
+          {{ t('welcome_subtitle') }}
         </p>
         <div class="flex flex-wrap gap-4">
-          <button class="bg-white text-indigo-600 px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-lg active:scale-95">New Project</button>
-          <button class="bg-indigo-500/20 text-white border border-indigo-400/30 px-8 py-3.5 rounded-2xl font-bold hover:bg-indigo-500/30 transition-all active:scale-95">Documentation</button>
+          <button class="bg-white text-indigo-600 px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-lg active:scale-95">{{ t('new_project') }}</button>
+          <button class="bg-indigo-500/20 text-white border border-indigo-400/30 px-8 py-3.5 rounded-2xl font-bold hover:bg-indigo-500/30 transition-all active:scale-95">{{ t('documentation') }}</button>
         </div>
       </div>
       <!-- Background SVG Decor -->
@@ -62,7 +62,7 @@ const stats = [
           <span class="text-emerald-500 font-bold text-xs bg-emerald-500/10 px-3 py-1.5 rounded-xl">{{ stat.trend }}</span>
         </div>
         <p class="text-slate-500 dark:text-white/40 font-medium mb-1">
-          {{ stat.label }}
+          {{ t(stat.label) }}
         </p>
         <h3 class="text-3xl font-bold dark:text-white text-slate-800 tracking-tight">
           {{ stat.value }}
@@ -75,9 +75,9 @@ const stats = [
       <div class="flex items-center justify-between mb-8">
         <h3 class="text-xl font-bold dark:text-white text-slate-800 flex items-center gap-3">
           <fa icon="chart-bar" class="text-indigo-600" />
-          Activity Feed
+          {{ t('activity_feed') }}
         </h3>
-        <button class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">View All</button>
+        <button class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">{{ t('view_all') }}</button>
       </div>
       
       <div class="space-y-4">
@@ -86,8 +86,8 @@ const stats = [
             <fa icon="user" class="text-lg" />
           </div>
           <div class="flex-1">
-            <p class="font-bold dark:text-white text-slate-800">Action performed by system</p>
-            <p class="text-xs text-slate-500 dark:text-white/40 mt-1">2 hours ago</p>
+            <p class="font-bold dark:text-white text-slate-800">{{ t('action_performed') }}</p>
+            <p class="text-xs text-slate-500 dark:text-white/40 mt-1">{{ t('hours_ago') }}</p>
           </div>
           <div class="hidden sm:block">
              <fa icon="check-circle" class="text-emerald-500 text-lg" />

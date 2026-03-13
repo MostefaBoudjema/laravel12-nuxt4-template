@@ -86,12 +86,12 @@ const handleLogin = async () => {
       <div class="relative z-10">
         <div class="mb-10">
           <h2 ref="loginTitle" class="text-4xl font-bold mb-2 dark:text-white text-slate-800 transition-colors">{{ t('login') }}</h2>
-          <p class="text-slate-500 dark:text-white/60">Enter your credentials to access your account</p>
+          <p class="text-slate-500 dark:text-white/60">{{ t('login_subtitle') }}</p>
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-6">
           <div ref="el => loginItems[0] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 text-slate-700 dark:text-white/80">Email Address</label>
+            <label class="block text-sm font-semibold mb-2 ml-1 text-slate-700 dark:text-white/80">{{ t('email_address') }}</label>
             <div class="relative">
               <fa icon="user" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30" />
               <input 
@@ -106,7 +106,7 @@ const handleLogin = async () => {
           </div>
 
           <div ref="el => loginItems[1] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 text-slate-700 dark:text-white/80">Password</label>
+            <label class="block text-sm font-semibold mb-2 ml-1 text-slate-700 dark:text-white/80">{{ t('password') }}</label>
             <div class="relative">
               <fa icon="lock" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30" />
               <input 
@@ -127,12 +127,12 @@ const handleLogin = async () => {
               class="w-full bg-indigo-600 dark:bg-white text-white dark:text-indigo-900 py-4 rounded-2xl font-bold hover:bg-indigo-700 dark:hover:bg-white/90 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:active:scale-100 flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20 dark:shadow-none"
             >
               <span v-if="loading" class="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></span>
-              <span>{{ loading ? 'Authenticating...' : t('login') }}</span>
+              <span>{{ loading ? t('authenticating') : t('login') }}</span>
             </button>
           </div>
 
           <div ref="el => loginItems[3] = el" class="text-center text-sm text-slate-500 dark:text-white/40 pt-2">
-            Don't have an account? <NuxtLink to="/register" class="text-indigo-600 dark:text-white font-bold hover:underline transition-colors">Create one</NuxtLink>
+            {{ t('dont_have_account') }} <NuxtLink to="/register" class="text-indigo-600 dark:text-white font-bold hover:underline transition-colors">{{ t('create_one') }}</NuxtLink>
           </div>
         </form>
         
