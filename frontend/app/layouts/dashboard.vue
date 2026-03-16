@@ -7,8 +7,8 @@ const isSidebarOpen = ref(false)
 const navLinks = [
   { to: '/dashboard', icon: 'dashboard', label: 'dashboard' },
   { to: '/dashboard/users', icon: 'users', label: 'users', role: 'admin' },
-  { to: '/dashboard/roles', icon: 'shield-alt', label: 'roles', role: 'admin' },
-  { to: '/dashboard/permissions', icon: 'key', label: 'permissions', role: 'admin' },
+  // { to: '/dashboard/roles', icon: 'shield-alt', label: 'roles', role: 'admin' },
+  // { to: '/dashboard/permissions', icon: 'key', label: 'permissions', role: 'admin' },
   { to: '/dashboard/reports', icon: 'chart-bar', label: 'reports', roles: ['admin', 'manager'] },
   { to: '/dashboard/settings', icon: 'cog', label: 'settings' }
 ]

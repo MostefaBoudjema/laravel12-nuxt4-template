@@ -1,25 +1,29 @@
 # Lightweight SaaS Starter (Laravel + Nuxt 4)
 
-A lightweight SaaS starter template built with a modern **API + SPA architecture**.
+A lightweight SaaS starter template built with a modern **API + SPA architecture** designed for SaaS products.
 
-## Stack
+---
 
-**Backend**
+# Stack
+
+## Backend
 
 * Laravel 12 (REST API only)
 * MySQL
-* Laravel Sanctum (token authentication)
+* Laravel Sanctum (API authentication)
 * Spatie Laravel Permission
-* Laravel Filament (admin panel for managing roles & permissions)
+* Laravel Filament (admin panel)
 
-**Frontend**
+## Frontend
 
 * Nuxt 4 (SPA mode)
 * TypeScript
 * Pinia
 * TailwindCSS
+* Nuxt i18n (English / French)
 * GSAP animations
 * FontAwesome 6
+* Dark / Light mode
 
 ---
 
@@ -27,50 +31,53 @@ A lightweight SaaS starter template built with a modern **API + SPA architecture
 
 ```
 saas-app/
-│
-├── backend/      # Laravel API
-└── frontend/     # Nuxt 4 SPA
+
+backend/        Laravel API
+frontend/       Nuxt 4 SPA
 ```
 
-Backend responsibilities:
+Backend responsibilities
 
 * authentication
 * authorization
 * business logic
 * database
+* admin panel (Filament)
 
-Frontend responsibilities:
+Frontend responsibilities
 
 * UI
+* routing
 * state management
-* route protection
+* permissions UI
 * animations
+* translations
+* theme switching
 
 ---
 
-# Versioning
+# API Versioning
 
-The API uses **versioned routes**.
+All routes use **versioning**.
 
 ```
 /api/v1/*
 ```
 
-Example:
+Examples
 
 ```
 POST /api/v1/login
 GET  /api/v1/me
 GET  /api/v1/users
+GET  /api/v1/reports
 ```
 
-This allows future expansion:
+Future versions can be introduced without breaking the API.
 
 ```
 /api/v2/
 ```
-
-without breaking existing clients.
 
 ---
 
@@ -78,52 +85,52 @@ without breaking existing clients.
 
 Authentication uses **Laravel Sanctum**.
 
-Flow:
+Flow
 
-1. User logs in
-2. Backend returns token
-3. Token stored in **secure cookie**
-4. Pinia store fetches `/api/v1/me`
-5. Roles & permissions loaded into frontend state
+1. user logs in
+2. backend returns token
+3. token stored in **secure cookie**
+4. Pinia fetches `/api/v1/me`
+5. roles and permissions stored in frontend state
 
 ---
 
 # Roles & Permissions
 
-Using **Spatie Laravel Permission**.
+Using **Spatie Laravel Permission**
 
-### Roles
+Roles
 
-| Role    | Permissions                        |
-| ------- | ---------------------------------- |
-| admin   | all permissions                    |
-| manager | dashboard + reports + manage users |
-| user    | dashboard only                     |
+| Role    | Permissions                      |
+| ------- | -------------------------------- |
+| admin   | full access                      |
+| manager | dashboard, reports, manage users |
+| user    | dashboard only                   |
 
 ---
 
-# Laravel Filament Admin Panel
+# Filament Admin Panel
 
-Filament provides a simple UI to manage:
+Filament is used to manage:
 
 * users
 * roles
 * permissions
 
-Admin panel URL:
+Admin URL
 
 ```
 /admin
 ```
 
-Features:
+Features
 
-* assign roles
+* create roles
 * assign permissions
 * manage users
-* audit roles quickly
+* update permissions visually
 
-Only **admin** can access the Filament panel.
+Only **admin** can access this panel.
 
 ---
 
@@ -139,7 +146,7 @@ Only **admin** can access the Filament panel.
 /unauthorized
 ```
 
-### Access Rules
+Access rules
 
 | Page      | Access          |
 | --------- | --------------- |
@@ -150,56 +157,113 @@ Only **admin** can access the Filament panel.
 
 ---
 
-# API Endpoints
+# TailwindCSS Styling
 
-### Auth
+TailwindCSS is used for all styling.
 
-| Method | Endpoint         |
-| ------ | ---------------- |
-| POST   | /api/v1/register |
-| POST   | /api/v1/login    |
-| POST   | /api/v1/logout   |
-| GET    | /api/v1/me       |
-
-### Admin
-
-| Method | Endpoint      |
-| ------ | ------------- |
-| GET    | /api/v1/users |
-
-### Reports
-
-| Method | Endpoint        |
-| ------ | --------------- |
-| GET    | /api/v1/reports |
-
----
-
-# Frontend Features
-
-### TailwindCSS
-
-Used for all styling.
-
-Example:
+Example
 
 ```html
-<div class="p-6 bg-white rounded-lg shadow">
+<div class="p-6 rounded-xl shadow bg-white dark:bg-gray-800">
 Dashboard
 </div>
 ```
 
 ---
 
-### GSAP Animations
+# Dark / Light Mode
 
-Used for:
+Dark mode uses **Tailwind dark class strategy**.
+
+Theme preference is stored in **localStorage**.
+
+Features
+
+* toggle button
+* auto detect system theme
+* persistent across reloads
+
+Example toggle
+
+```
+🌙 Dark
+☀️ Light
+```
+
+Example usage
+
+```html
+<div class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+Content
+</div>
+```
+
+---
+
+# Internationalization (i18n)
+
+Using **Nuxt i18n**
+
+Supported languages
+
+| Language | Code |
+| -------- | ---- |
+| English  | en   |
+| French   | fr   |
+
+Example structure
+
+```
+locales/
+en.json
+fr.json
+```
+
+Example
+
+en.json
+
+```
+{
+  "login": "Login",
+  "dashboard": "Dashboard",
+  "logout": "Logout"
+}
+```
+
+fr.json
+
+```
+{
+  "login": "Connexion",
+  "dashboard": "Tableau de bord",
+  "logout": "Déconnexion"
+}
+```
+
+Usage
+
+```vue
+{{ $t('dashboard') }}
+```
+
+Language switcher example
+
+```
+EN | FR
+```
+
+---
+
+# Animations (GSAP)
+
+Used for
 
 * page transitions
-* list reveals
+* card reveal
 * dashboard animations
 
-Example:
+Example
 
 ```ts
 gsap.from(".card", {
@@ -212,34 +276,40 @@ gsap.from(".card", {
 
 ---
 
-### FontAwesome
+# FontAwesome
 
-Global component:
+Global component
 
 ```
 <fa icon="user" />
+```
+
+Example
+
+```
+<fa icon="chart-line" />
 ```
 
 ---
 
 # Vue Permission Directives
 
-Custom directives for UI permissions.
+Custom directives
 
 ```
 v-role="'admin'"
 v-can="'edit users'"
 ```
 
-Example:
+Example
 
 ```vue
 <button v-can="'delete users'">
-Delete User
+Delete
 </button>
 
 <div v-role="'admin'">
-Admin Controls
+Admin controls
 </div>
 ```
 
@@ -277,18 +347,26 @@ plugins/
 gsap.client.ts
 fontawesome.ts
 directives.ts
+i18n.ts
+theme.client.ts
 
 stores/
 auth.ts
+theme.ts
 
 composables/
 useApi.ts
 useAuth.ts
+useTheme.ts
+
+locales/
+en.json
+fr.json
 ```
 
 ---
 
-# Laravel Folder Structure
+# Laravel Backend Structure
 
 ```
 backend/
@@ -299,8 +377,6 @@ Controllers/
 AuthController.php
 UserController.php
 ReportController.php
-
-Middleware/
 
 Models/
 User.php
@@ -335,19 +411,19 @@ cd saas-starter
 cd backend
 ```
 
-Install dependencies:
+Install dependencies
 
 ```
 composer install
 ```
 
-Create environment file:
+Create environment file
 
 ```
 cp .env.example .env
 ```
 
-Configure database:
+Configure database
 
 ```
 DB_DATABASE=saas
@@ -355,37 +431,37 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Generate key:
+Generate key
 
 ```
 php artisan key:generate
 ```
 
-Run migrations:
+Run migrations
 
 ```
 php artisan migrate
 ```
 
-Install Filament:
+Install Filament
 
 ```
 php artisan filament:install
 ```
 
-Seed roles:
+Seed roles and permissions
 
 ```
 php artisan db:seed
 ```
 
-Start server:
+Start API server
 
 ```
 php artisan serve
 ```
 
-Backend URL:
+Backend URL
 
 ```
 http://127.0.0.1:8000
@@ -399,31 +475,31 @@ http://127.0.0.1:8000
 cd frontend
 ```
 
-Install dependencies:
+Install dependencies
 
 ```
 npm install
 ```
 
-Create environment file:
+Create environment file
 
 ```
 cp .env.example .env
 ```
 
-Add API URL:
+Add API URL
 
 ```
 NUXT_PUBLIC_API_URL=http://127.0.0.1:8000/api/v1
 ```
 
-Run dev server:
+Start development server
 
 ```
 npm run dev
 ```
 
-Frontend URL:
+Frontend URL
 
 ```
 http://localhost:3000
@@ -431,27 +507,33 @@ http://localhost:3000
 
 ---
 
-# Authentication State (Pinia)
+# Pinia State Management
 
-Pinia store manages:
+Auth store handles
 
 ```
 user
 roles
 permissions
-token
 login()
 logout()
 fetchUser()
 ```
 
-User is automatically fetched if cookie exists.
+Theme store handles
+
+```
+theme
+toggleTheme()
+```
 
 ---
 
-# Backend Route Protection
+# Route Protection
 
-Using middleware:
+## Backend
+
+Using middleware
 
 ```
 auth:sanctum
@@ -459,11 +541,9 @@ role:admin
 permission:view reports
 ```
 
----
+## Frontend
 
-# Frontend Route Protection
-
-Nuxt middleware:
+Nuxt middleware
 
 ```
 auth.ts
@@ -471,7 +551,7 @@ guest.ts
 role.ts
 ```
 
-Example:
+Example
 
 ```
 definePageMeta({
@@ -491,19 +571,10 @@ php artisan route:cache
 php artisan optimize
 ```
 
----
-
 ## Frontend
-
-Build Nuxt:
 
 ```
 npm run build
-```
-
-Preview:
-
-```
 npm run preview
 ```
 
@@ -513,9 +584,9 @@ npm run preview
 
 * Sanctum authentication
 * cookie-based tokens
-* no localStorage secrets
-* backend authorization enforcement
-* role-based UI rendering
+* no sensitive data in localStorage
+* role-based UI
+* backend permission enforcement
 
 ---
 
@@ -523,10 +594,10 @@ npm run preview
 
 * Stripe billing
 * multi-tenancy
-* team workspaces
-* audit logs
-* notifications
+* SaaS subscriptions
+* notification system
 * usage analytics
+* audit logs
 
 ---
 
