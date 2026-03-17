@@ -28,11 +28,14 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
-            'message' => 'Registration successful.',
-            'token'   => $token,
-            'user'    => $this->userData($user),
-        ], 201);
+        return $this->successResponse(
+            data: [
+                'token' => $token,
+                'user'  => $this->userData($user),
+            ],
+            message: 'Registration successful.',
+            status: 201
+        );
     }
 
     /**
@@ -46,20 +49,26 @@ class AuthController extends Controller
         ]);
 
         if (!Auth::attempt($request->only('email', 'password'))) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+            return $this->errorResponse(
+                message: 'The provided credentials are incorrect.',
+                status: 422,
+                errors: [
+                    'email' => ['The provided credentials are incorrect.'],
+                ]
+            );
         }
 
         /** @var User $user */
         $user  = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
-            'message' => 'Login successful.',
-            'token'   => $token,
-            'user'    => $this->userData($user),
-        ]);
+        return $this->successResponse(
+            data: [
+                'token' => $token,
+                'user'  => $this->userData($user),
+            ],
+            message: 'Login successful.'
+        );
     }
 
     /**
@@ -69,7 +78,7 @@ class AuthController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logged out successfully.']);
+        return $this->successResponse(message: 'Logged out successfully.');
     }
 
     /**
@@ -77,9 +86,11 @@ class AuthController extends Controller
      */
     public function me(Request $request): JsonResponse
     {
-        return response()->json([
-            'user' => $this->userData($request->user()),
-        ]);
+        return $this->successResponse(
+            data: [
+                'user' => $this->userData($request->user()),
+            ]
+        );
     }
 
     /**

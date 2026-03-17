@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $data = $this->userService->listUsers($request->only('search'));
 
-        return response()->json($data);
+        return $this->successResponse(data: $data);
     }
 
     /**
@@ -40,10 +40,11 @@ class UserController extends Controller
 
         $user = $this->userService->createUser($validated);
 
-        return response()->json([
-            'message' => 'User created successfully',
-            'data' => $user
-        ], 201);
+        return $this->successResponse(
+            data: $user,
+            message: 'User created successfully',
+            status: 201
+        );
     }
 
     /**
@@ -61,10 +62,10 @@ class UserController extends Controller
 
         $user = $this->userService->updateUser($user, $validated);
 
-        return response()->json([
-            'message' => 'User updated successfully',
-            'data' => $user
-        ]);
+        return $this->successResponse(
+            data: $user,
+            message: 'User updated successfully'
+        );
     }
 
     /**
@@ -74,9 +75,12 @@ class UserController extends Controller
     {
         try {
             $this->userService->deleteUser($user);
-            return response()->json(['message' => 'User deleted successfully']);
+            return $this->successResponse(message: 'User deleted successfully');
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 403);
+            return $this->errorResponse(
+                message: $e->getMessage(),
+                status: 403
+            );
         }
     }
 }

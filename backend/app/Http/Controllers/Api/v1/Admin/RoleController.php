@@ -20,7 +20,7 @@ class RoleController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
         $roles = $query->get();
-        return response()->json(['data' => $roles]);
+        return $this->successResponse(data: $roles);
     }
 
     /**
@@ -40,10 +40,11 @@ class RoleController extends Controller
             $role->syncPermissions($validated['permissions']);
         }
 
-        return response()->json([
-            'message' => 'Role created successfully',
-            'data' => $role->load('permissions')
-        ], 201);
+        return $this->successResponse(
+            data: $role->load('permissions'),
+            message: 'Role created successfully',
+            status: 201
+        );
     }
 
     /**
@@ -51,7 +52,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        return response()->json(['data' => $role->load('permissions')]);
+        return $this->successResponse(data: $role->load('permissions'));
     }
 
     /**
@@ -75,10 +76,10 @@ class RoleController extends Controller
             $role->syncPermissions($validated['permissions']);
         }
 
-        return response()->json([
-            'message' => 'Role updated successfully',
-            'data' => $role->load('permissions')
-        ]);
+        return $this->successResponse(
+            data: $role->load('permissions'),
+            message: 'Role updated successfully'
+        );
     }
 
     /**
@@ -87,11 +88,14 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         if ($role->name === 'admin') {
-            return response()->json(['message' => 'Admin role cannot be deleted'], 403);
+            return $this->errorResponse(
+                message: 'Admin role cannot be deleted',
+                status: 403
+            );
         }
 
         $role->delete();
 
-        return response()->json(['message' => 'Role deleted successfully']);
+        return $this->successResponse(message: 'Role deleted successfully');
     }
 }

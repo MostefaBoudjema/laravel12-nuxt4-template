@@ -15,8 +15,6 @@ class ReportController extends Controller
     {
         $data = $reportService->getSummary($request->only('search'));
 
-        return response()->json([
-            'data' => $data,
-        ]);
+        return $this->successResponse(data: $data);
     }
 }

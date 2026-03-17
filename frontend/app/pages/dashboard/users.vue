@@ -17,7 +17,7 @@ const searchQuery = ref('')
 const deferredSearch = ref('')
 let debounceTimeout: any = null
 
-const { data: usersData, pending, refresh } = await useFetch<any>('/users', {
+const { data: usersData, pending, refresh, error } = await useFetch<any>('/users', {
   baseURL: config.public.apiBase,
   query: { search: deferredSearch },
   headers: {
@@ -51,7 +51,7 @@ const { data: rolesData } = await useFetch<any>('/roles', {
   }
 })
 
-const users = computed(() => usersData.value?.data || [])
+const users = computed(() => usersData.value?.data?.data || [])
 const roles = computed(() => rolesData.value?.data || [])
 
 // CRUD State

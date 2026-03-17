@@ -19,7 +19,7 @@ class PermissionController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
         $permissions = $query->get();
-        return response()->json(['data' => $permissions]);
+        return $this->successResponse(data: $permissions);
     }
 
     /**
@@ -36,10 +36,11 @@ class PermissionController extends Controller
             'guard_name' => 'web'
         ]);
 
-        return response()->json([
-            'message' => 'Permission created successfully',
-            'data' => $permission
-        ], 201);
+        return $this->successResponse(
+            data: $permission,
+            message: 'Permission created successfully',
+            status: 201
+        );
     }
 
     /**
@@ -47,7 +48,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        return response()->json(['data' => $permission]);
+        return $this->successResponse(data: $permission);
     }
 
     /**
@@ -65,10 +66,10 @@ class PermissionController extends Controller
 
         $permission->update(['name' => $validated['name']]);
 
-        return response()->json([
-            'message' => 'Permission updated successfully',
-            'data' => $permission
-        ]);
+        return $this->successResponse(
+            data: $permission,
+            message: 'Permission updated successfully'
+        );
     }
 
     /**
@@ -78,6 +79,6 @@ class PermissionController extends Controller
     {
         $permission->delete();
 
-        return response()->json(['message' => 'Permission deleted successfully']);
+        return $this->successResponse(message: 'Permission deleted successfully');
     }
 }

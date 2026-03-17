@@ -43,14 +43,14 @@ const handleRegister = async () => {
   errors.value = {}
   
   try {
-    const response = await $fetch<{ token: string, user: any }>('/register', {
+    const response = await $fetch<{ success: boolean; data: { token: string; user: any } }>('/register', {
       method: 'POST',
       baseURL: useRuntimeConfig().public.apiBase,
       body: form
     })
     
-    auth.setToken(response.token)
-    auth.setUser(response.user)
+    auth.setToken(response.data.token)
+    auth.setUser(response.data.user)
     
     navigateTo('/dashboard')
   } catch (e: any) {

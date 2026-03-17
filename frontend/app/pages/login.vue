@@ -47,14 +47,14 @@ const handleLogin = async () => {
   errors.value = {}
   
   try {
-    const response = await $fetch<{ token: string, user: any }>('/login', {
+    const response = await $fetch<{ success: boolean; data: { token: string; user: any } }>('/login', {
       method: 'POST',
       baseURL: useRuntimeConfig().public.apiBase,
       body: form
     })
     
-    auth.setToken(response.token)
-    auth.setUser(response.user)
+    auth.setToken(response.data.token)
+    auth.setUser(response.data.user)
     
     // Animate out before navigating
     gsap.to(loginBox.value, {

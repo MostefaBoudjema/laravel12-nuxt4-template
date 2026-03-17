@@ -32,13 +32,13 @@ export const useAuthStore = defineStore('auth', () => {
     if (!token.value) return
 
     try {
-      const { user: userData } = await $fetch<{ user: User }>('/me', {
+      const response = await $fetch<{ success: boolean; data: { user: User } }>('/me', {
         baseURL: useRuntimeConfig().public.apiBase,
         headers: {
           Authorization: `Bearer ${token.value}`
         }
       })
-      user.value = userData
+      user.value = response.data.user
     } catch (error) {
       token.value = null
       user.value = null
