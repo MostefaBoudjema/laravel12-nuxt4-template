@@ -43,8 +43,12 @@ const stats = [
           {{ t('welcome_subtitle') }}
         </p>
         <div class="flex flex-wrap gap-4">
-          <button class="bg-white text-indigo-600 px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-lg active:scale-95">{{ t('new_project') }}</button>
-          <button class="bg-indigo-500/20 text-white border border-indigo-400/30 px-8 py-3.5 rounded-2xl font-bold hover:bg-indigo-500/30 transition-all active:scale-95">{{ t('documentation') }}</button>
+          <UiButton variant="secondary" size="lg">
+            {{ t('new_project') }}
+          </UiButton>
+          <UiButton variant="ghost" size="lg" class="!text-white !border-indigo-400/30 !bg-indigo-500/20 hover:!bg-indigo-500/30">
+            {{ t('documentation') }}
+          </UiButton>
         </div>
       </div>
       <!-- Background SVG Decor -->
@@ -55,12 +59,12 @@ const stats = [
 
     <!-- Stats Grid -->
     <div ref="statsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div v-for="stat in stats" :key="stat.label" class="stat-card dark:bg-slate-800 bg-white p-8 rounded-[2rem] border border-slate-100 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <UiCard v-for="stat in stats" :key="stat.label" class="stat-card hover:shadow-xl hover:-translate-y-1 transition-all duration-300 !p-8">
         <div class="flex items-center justify-between mb-6">
           <div class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
             <fa :icon="stat.icon" class="text-xl" />
           </div>
-          <span class="text-emerald-500 font-bold text-xs bg-emerald-500/10 px-3 py-1.5 rounded-xl">{{ stat.trend }}</span>
+          <UiBadge variant="success" size="sm">{{ stat.trend }}</UiBadge>
         </div>
         <p class="text-slate-500 dark:text-white/40 font-medium mb-1">
           {{ t(stat.label) }}
@@ -68,19 +72,21 @@ const stats = [
         <h3 class="text-3xl font-bold dark:text-white text-slate-800 tracking-tight">
           {{ stat.value }}
         </h3>
-      </div>
+      </UiCard>
     </div>
 
     <!-- Activity Feed -->
-    <div class="dark:bg-slate-800 bg-white rounded-[2rem] border border-slate-100 dark:border-white/10 shadow-sm p-8 md:p-10">
-      <div class="flex items-center justify-between mb-8">
-        <h3 class="text-xl font-bold dark:text-white text-slate-800 flex items-center gap-3">
-          <fa icon="chart-bar" class="text-indigo-600" />
-          {{ t('activity_feed') }}
-        </h3>
-        <button class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">{{ t('view_all') }}</button>
-      </div>
-      
+    <UiCard class="!p-8 md:!p-10">
+      <template #header>
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold dark:text-white text-slate-800 flex items-center gap-3">
+            <fa icon="chart-bar" class="text-indigo-600" />
+            {{ t('activity_feed') }}
+          </h3>
+          <UiButton variant="ghost" size="sm">{{ t('view_all') }}</UiButton>
+        </div>
+      </template>
+
       <div class="space-y-4">
         <div v-for="j in 5" :key="j" class="flex items-center gap-5 p-5 hover:bg-slate-50 dark:hover:bg-white/5 rounded-2xl transition-all border border-transparent hover:border-slate-200 dark:hover:border-white/10">
           <div class="w-12 h-12 rounded-full dark:bg-white/10 bg-slate-100 flex items-center justify-center text-slate-400 dark:text-slate-500">
@@ -95,6 +101,6 @@ const stats = [
           </div>
         </div>
       </div>
-    </div>
+    </UiCard>
   </div>
 </template>

@@ -18,12 +18,12 @@ const { t } = useI18n()
     </p>
     
     <div class="flex gap-4">
-      <NuxtLink to="/" class="px-8 py-4 bg-white text-indigo-900 font-bold rounded-2xl hover:bg-white/90 transition-all shadow-xl active:scale-95">
+      <UiButton to="/" variant="primary" size="lg">
         {{ t('back_to_dashboard') }}
-      </NuxtLink>
-      <button @click="$router.back()" class="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all active:scale-95">
+      </UiButton>
+      <UiButton variant="secondary" size="lg" @click="$router.back()">
         {{ t('go_back') }}
-      </button>
+      </UiButton>
     </div>
   </div>
 </template>

@@ -90,55 +90,61 @@ const handleLogin = async () => {
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-6">
-          <div ref="el => loginItems[0] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 text-slate-700 dark:text-white/80">{{ t('email_address') }}</label>
-            <div class="relative">
-              <fa icon="user" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30" />
-              <input 
-                v-model="form.email" 
-                type="email" 
-                placeholder="email@example.com" 
-                class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-purple-500 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 dark:text-white text-slate-800"
-                required
-              />
-            </div>
-            <p v-if="errors.email" class="text-rose-400 text-xs mt-2 ml-1">{{ errors.email[0] }}</p>
-          </div>
-
-          <div ref="el => loginItems[1] = el">
-            <label class="block text-sm font-semibold mb-2 ml-1 text-slate-700 dark:text-white/80">{{ t('password') }}</label>
-            <div class="relative">
-              <fa icon="lock" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30" />
-              <input 
-                v-model="form.password" 
-                type="password" 
-                placeholder="••••••••" 
-                class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-purple-500 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 dark:text-white text-slate-800"
-                required
-              />
-            </div>
-            <p v-if="errors.password" class="text-rose-400 text-xs mt-2 ml-1">{{ errors.password[0] }}</p>
-          </div>
-
-          <div ref="el => loginItems[2] = el" class="pt-2">
-            <button 
-              type="submit" 
-              :disabled="loading"
-              class="w-full bg-indigo-600 dark:bg-white text-white dark:text-indigo-900 py-4 rounded-2xl font-bold hover:bg-indigo-700 dark:hover:bg-white/90 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:active:scale-100 flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20 dark:shadow-none"
+          <div :ref="el => loginItems[0] = el">
+            <UiInput
+              v-model="form.email"
+              id="login-email"
+              type="email"
+              :label="t('email_address')"
+              placeholder="email@example.com"
+              :error="errors.email?.[0] || ''"
+              size="lg"
+              autocomplete="email"
             >
-              <span v-if="loading" class="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></span>
-              <span>{{ loading ? t('authenticating') : t('login') }}</span>
-            </button>
+              <template #left>
+                <fa icon="user" />
+              </template>
+            </UiInput>
           </div>
 
-          <div ref="el => loginItems[3] = el" class="text-center text-sm text-slate-500 dark:text-white/40 pt-2">
+          <div :ref="el => loginItems[1] = el">
+            <UiInput
+              v-model="form.password"
+              id="login-password"
+              type="password"
+              :label="t('password')"
+              placeholder="••••••••"
+              :error="errors.password?.[0] || ''"
+              size="lg"
+              autocomplete="current-password"
+            >
+              <template #left>
+                <fa icon="lock" />
+              </template>
+            </UiInput>
+          </div>
+
+          <div :ref="el => loginItems[2] = el" class="pt-2">
+            <UiButton
+              type="submit"
+              :loading="loading"
+              :disabled="loading"
+              block
+              size="lg"
+            >
+              {{ loading ? t('authenticating') : t('login') }}
+            </UiButton>
+          </div>
+
+          <div :ref="el => loginItems[3] = el" class="text-center text-sm text-slate-500 dark:text-white/40 pt-2">
             {{ t('dont_have_account') }} <NuxtLink to="/register" class="text-indigo-600 dark:text-white font-bold hover:underline transition-colors">{{ t('create_one') }}</NuxtLink>
           </div>
         </form>
         
-        <div v-if="errors.server" class="mt-6 p-4 bg-rose-500/20 border border-rose-500/30 rounded-2xl text-rose-600 dark:text-rose-200 text-sm flex items-center gap-3">
-          <fa icon="exclamation-triangle" />
-          {{ errors.server[0] }}
+        <div v-if="errors.server" class="mt-6">
+          <UiAlert variant="danger" :title="t('login')" dismissible @close="errors.server = undefined">
+            {{ errors.server[0] }}
+          </UiAlert>
         </div>
       </div>
     </div>

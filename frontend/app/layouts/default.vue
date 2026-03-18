@@ -62,7 +62,7 @@ const isMenuOpen = ref(false)
       </transition>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
+    <main class="w-full mx-auto px-4 py-12">
       <slot />
     </main>
 

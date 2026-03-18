@@ -143,55 +143,58 @@ const deleteUser = async (userId: number) => {
         <p class="text-slate-500 dark:text-slate-400">{{ t('manage_users') }}</p>
       </div>
       <div class="flex items-center gap-4">
-        <div class="relative group">
-          <fa icon="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
-          <input 
-            v-model="searchQuery"
-            type="text" 
-            :placeholder="t('search_users') || 'Search users...'"
-            class="pl-11 pr-10 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-64 transition-all shadow-sm"
-          />
-          <button 
-            v-if="searchQuery" 
-            @click="searchQuery = ''"
-            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-rose-500 transition-colors shrink-0"
-          >
-            <fa icon="times" />
-          </button>
-        </div>
+        <UiInput
+          v-model="searchQuery"
+          id="users-search"
+          type="text"
+          :placeholder="t('search_users') || 'Search users...'"
+          size="sm"
+        >
+          <template #left>
+            <fa icon="search" />
+          </template>
+          <template #right>
+            <button v-if="searchQuery" @click="searchQuery = ''" class="text-slate-400 hover:text-rose-500 transition-colors">
+              <fa icon="times" />
+            </button>
+          </template>
+        </UiInput>
         <div class="flex gap-3">
-          <button @click="refresh" class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-xl font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95">
+          <UiButton variant="secondary" size="md" @click="refresh">
             <fa icon="sync" :class="{ 'animate-spin': pending }" />
-          </button>
-          <button @click="openAddDrawer" class="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-indigo-700 transition-all shadow-md active:scale-95">
+          </UiButton>
+          <UiButton variant="primary" size="md" @click="openAddDrawer">
             <fa icon="plus" />
             {{ t('add_user') }}
-          </button>
+          </UiButton>
         </div>
       </div>
     </div>
 
-    <div v-if="error" class="bg-rose-50 dark:bg-rose-950 border border-rose-100 dark:border-rose-900 p-6 rounded-2xl text-rose-600 dark:text-rose-400 flex items-center gap-4">
-      <fa icon="exclamation-triangle" class="text-xl" />
-      <div>
-        <p class="font-bold">{{ t('failed_load_users') }}</p>
-        <p class="text-sm">{{ error.message }}</p>
-      </div>
+    <div v-if="error">
+      <UiAlert variant="danger">
+        <div class="flex items-center gap-4">
+          <fa icon="exclamation-triangle" class="text-xl" />
+          <div>
+            <p class="font-bold">{{ t('failed_load_users') }}</p>
+            <p class="text-sm">{{ error.message }}</p>
+          </div>
+        </div>
+      </UiAlert>
     </div>
 
-    <div v-else class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
-      <table class="w-full text-left">
-        <thead class="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
-          <tr>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('user_header') }}</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('roles_header') }}</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('joined_header') }}</th>
-            <th class="px-8 py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('actions_header') }}</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
+    <div v-else>
+      <UiTable>
+        <template #head="{ cellClass }">
+          <th :class="cellClass" class="!px-8 !py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('user_header') }}</th>
+          <th :class="cellClass" class="!px-8 !py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('roles_header') }}</th>
+          <th :class="cellClass" class="!px-8 !py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('joined_header') }}</th>
+          <th :class="cellClass" class="!px-8 !py-5 text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ t('actions_header') }}</th>
+        </template>
+
+        <template #body="{ cellClass }">
           <tr v-for="user in users" :key="user.id" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-            <td class="px-8 py-6">
+            <td :class="cellClass" class="!px-8 !py-6">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center font-bold text-indigo-700 dark:text-indigo-300">
                   {{ user.name.charAt(0) }}
@@ -202,24 +205,24 @@ const deleteUser = async (userId: number) => {
                 </div>
               </div>
             </td>
-            <td class="px-8 py-6">
+            <td :class="cellClass" class="!px-8 !py-6">
               <div class="flex flex-wrap gap-2">
-                <span v-for="role in user.roles" :key="role" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
+                <UiBadge v-for="role in user.roles" :key="role" variant="primary" size="sm">
                   {{ role }}
-                </span>
+                </UiBadge>
               </div>
             </td>
-            <td class="px-8 py-6 text-sm text-slate-500 dark:text-slate-400">
+            <td :class="cellClass" class="!px-8 !py-6 text-sm text-slate-500 dark:text-slate-400">
               {{ new Date(user.created_at).toLocaleDateString() }}
             </td>
-            <td class="px-8 py-6">
+            <td :class="cellClass" class="!px-8 !py-6">
               <div class="flex items-center gap-4">
-                <button @click="openEditDrawer(user)" class="text-slate-400 hover:text-indigo-600 transition-colors">
+                <UiButton variant="ghost" size="sm" @click="openEditDrawer(user)">
                   <fa icon="edit" />
-                </button>
-                <button v-if="auth.user?.id !== user.id" @click="deleteUser(user.id)" class="text-slate-400 hover:text-rose-600 transition-colors">
+                </UiButton>
+                <UiButton v-if="auth.user?.id !== user.id" variant="ghost" size="sm" @click="deleteUser(user.id)" class="!text-slate-400 hover:!text-rose-600">
                   <fa icon="trash" />
-                </button>
+                </UiButton>
               </div>
             </td>
           </tr>
@@ -228,8 +231,8 @@ const deleteUser = async (userId: number) => {
               {{ t('no_users_found') }}
             </td>
           </tr>
-        </tbody>
-      </table>
+        </template>
+      </UiTable>
       
       <div v-if="pending" class="p-12 flex justify-center items-center gap-4">
         <fa icon="cog" class="text-indigo-600 dark:text-indigo-400 text-2xl animate-spin" />
@@ -249,55 +252,55 @@ const deleteUser = async (userId: number) => {
       <div v-if="isDrawerOpen" class="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-100 dark:border-slate-800 flex flex-col">
         <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
           <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">{{ isEditing ? t('edit_user') : t('add_user') }}</h3>
-          <button @click="closeDrawer" class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+          <UiButton variant="ghost" size="sm" @click="closeDrawer">
             <fa icon="times" />
-          </button>
+          </UiButton>
         </div>
         
         <form @submit.prevent="handleSubmit" class="flex-1 overflow-hidden flex flex-col">
           <div class="flex-1 overflow-y-auto p-8 space-y-8">
             <div class="space-y-6">
-              <div class="space-y-3">
-                <label class="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
+              <UiInput
+                v-model="form.name"
+                id="user-form-name"
+                type="text"
+                :label="t('full_name')"
+                placeholder="John Doe"
+                size="lg"
+                required
+              >
+                <template #left>
                   <fa icon="user" class="text-indigo-500" />
-                  {{ t('full_name') }}
-                </label>
-                <input 
-                  v-model="form.name" 
-                  type="text" 
-                  required
-                  class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm"
-                  placeholder="John Doe"
-                />
-              </div>
+                </template>
+              </UiInput>
 
-              <div class="space-y-3">
-                <label class="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
+              <UiInput
+                v-model="form.email"
+                id="user-form-email"
+                type="email"
+                :label="t('email_address')"
+                placeholder="john@example.com"
+                size="lg"
+                required
+              >
+                <template #left>
                   <fa icon="envelope" class="text-indigo-500" />
-                  {{ t('email_address') }}
-                </label>
-                <input 
-                  v-model="form.email" 
-                  type="email" 
-                  required
-                  class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm"
-                  placeholder="john@example.com"
-                />
-              </div>
+                </template>
+              </UiInput>
 
-              <div class="space-y-3">
-                <label class="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
+              <UiInput
+                v-model="form.password"
+                id="user-form-password"
+                type="password"
+                :label="t('password')"
+                :placeholder="isEditing ? t('keep_empty_password') : '********'"
+                :required="!isEditing"
+                size="lg"
+              >
+                <template #left>
                   <fa icon="lock" class="text-indigo-500" />
-                  {{ t('password') }}
-                </label>
-                <input 
-                  v-model="form.password" 
-                  type="password" 
-                  :required="!isEditing"
-                  class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm"
-                  :placeholder="isEditing ? t('keep_empty_password') : '********'"
-                />
-              </div>
+                </template>
+              </UiInput>
 
               <div class="space-y-4">
                 <label class="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
@@ -327,13 +330,12 @@ const deleteUser = async (userId: number) => {
           </div>
 
           <div class="p-8 bg-slate-50/50 dark:bg-slate-800/30 border-t border-slate-100 dark:border-slate-700 flex justify-end gap-4">
-            <button type="button" @click="closeDrawer" class="px-6 py-3 rounded-2xl font-bold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+            <UiButton variant="ghost" @click="closeDrawer">
               {{ t('cancel') }}
-            </button>
-            <button type="submit" :disabled="submitting" class="flex items-center gap-3 bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/25 active:scale-95 disabled:opacity-50">
-              <fa v-if="submitting" icon="cog" class="animate-spin" />
+            </UiButton>
+            <UiButton type="submit" :loading="submitting" :disabled="submitting">
               {{ t('save_user') }}
-            </button>
+            </UiButton>
           </div>
         </form>
       </div>
