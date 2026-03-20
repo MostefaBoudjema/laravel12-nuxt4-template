@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
@@ -28,17 +30,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(\Illuminate\Http\Request $request): JsonResponse
+    public function store(StoreUserRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'roles' => 'array',
-            'roles.*' => 'string|exists:roles,name',
-        ]);
-
-        $user = $this->userService->createUser($validated);
+        $user = $this->userService->createUser($request->validated());
 
         return $this->successResponse(
             data: $user,
@@ -50,17 +44,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(\Illuminate\Http\Request $request, User $user): JsonResponse
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'nullable|string|min:8',
-            'roles' => 'array',
-            'roles.*' => 'string|exists:roles,name',
-        ]);
-
-        $user = $this->userService->updateUser($user, $validated);
+        $user = $this->userService->updateUser($user, $request->validated());
 
         return $this->successResponse(
             data: $user,
