@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -22,6 +23,8 @@ class UserController extends Controller
      */
     public function index(\Illuminate\Http\Request $request): JsonResponse
     {
+        Gate::authorize('manage-users');
+
         $data = $this->userService->listUsers($request->only('search'));
 
         return $this->successResponse(data: $data);
@@ -32,6 +35,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request): JsonResponse
     {
+        Gate::authorize('manage-users');
+
         $user = $this->userService->createUser($request->validated());
 
         return $this->successResponse(
@@ -46,6 +51,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
+        Gate::authorize('manage-users');
+
         $user = $this->userService->updateUser($user, $request->validated());
 
         return $this->successResponse(
@@ -59,6 +66,8 @@ class UserController extends Controller
      */
     public function destroy(User $user): JsonResponse
     {
+        Gate::authorize('manage-users');
+
         try {
             $this->userService->deleteUser($user);
             return $this->successResponse(message: 'User deleted successfully');
