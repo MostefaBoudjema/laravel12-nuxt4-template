@@ -1,0 +1,125 @@
+﻿Launching lib\main.dart on Chrome in debug mode...
+Waiting for connection from debug service on Chrome...             17,4s
+
+Flutter run key commands.
+r Hot reload. 
+R Hot restart.
+h List all available interactive commands.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+
+Debug service listening on ws://127.0.0.1:62979/WrVQgbMc5VU=/ws
+A Dart VM Service on Chrome is available at: http://127.0.0.1:62979/WrVQgbMc5VU=
+The Flutter DevTools debugger and profiler on Chrome is available at: http://127.0.0.1:62979/WrVQgbMc5VU=/devtools/?uri=ws://127.0.0.1:62979/WrVQgbMc5VU=/ws
+Starting application from main method in: org-dartlang-app:/web_entrypoint.dart.
+DartError: Unsupported operation: _Namespace
+dart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/errors.dart 274:3  throw_
+dart-sdk/lib/_internal/js_dev_runtime/patch/io_patch.dart 212:5              get _namespace
+dart-sdk/lib/io/directory_impl.dart 141:40                                   get systemTemp
+dart-sdk/lib/io/directory.dart 218:25                                        get systemTemp
+package:mobile/src/core/session_store.dart 5:55                              get [_tokenFile]
+package:mobile/src/core/session_store.dart 12:27                             <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 623:19          <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 648:23          <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 542:3           _asyncStartSync
+package:mobile/src/core/session_store.dart 11:19                             readToken
+package:mobile/src/state/auth_controller.dart 28:32                          <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 623:19          <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 648:23          <fn>
+dart-sdk/lib/_internal/js_dev_runtime/patch/async_patch.dart 542:3           _asyncStartSync
+package:mobile/src/state/auth_controller.dart 25:16                          bootstrap
+package:mobile/src/app.dart 51:5                                             initState
+package:flutter/src/widgets/framework.dart 5950:55                           [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5982:11                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5973:11                           [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5982:11                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5973:11                           [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5982:11                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5973:11                           [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5982:11                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5973:11                           [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/view.dart 481:16                                 [_updateChild]
+package:flutter/src/widgets/view.dart 504:5                                  mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/framework.dart 5841:16                           performRebuild
+package:flutter/src/widgets/framework.dart 5982:11                           performRebuild
+package:flutter/src/widgets/framework.dart 5529:7                            rebuild
+package:flutter/src/widgets/framework.dart 5799:5                            [_firstBuild]
+package:flutter/src/widgets/framework.dart 5973:11                           [_firstBuild]
+package:flutter/src/widgets/framework.dart 5793:5                            mount
+package:flutter/src/widgets/framework.dart 4587:19                           inflateWidget
+package:flutter/src/widgets/framework.dart 4059:18                           updateChild
+package:flutter/src/widgets/binding.dart 1822:16                             [_rebuild]
+package:flutter/src/widgets/binding.dart 1791:5                              mount
+package:flutter/src/widgets/binding.dart 1744:16                             <fn>
+package:flutter/src/widgets/framework.dart 3101:11                           buildScope
+package:flutter/src/widgets/binding.dart 1743:12                             attach
+package:flutter/src/widgets/binding.dart 1419:26                             attachToBuildOwner
+package:flutter/src/widgets/binding.dart 1404:5                              attachRootWidget
+package:flutter/src/widgets/binding.dart 1390:7                              <fn>
+dart-sdk/lib/_internal/js_dev_runtime/private/isolate_helper.dart 47:11      internalCallback
