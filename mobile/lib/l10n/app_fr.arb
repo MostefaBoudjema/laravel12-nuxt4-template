@@ -1,0 +1,24 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Utilisateurs système",
+  "manageUsers": "Gérer les utilisateurs",
+  "searchUsers": "Rechercher des utilisateurs...",
+  "addUser": "Ajouter un utilisateur",
+  "noUsersFound": "Aucun utilisateur trouvé.",
+  "refresh": "Rafraîchir",
+  "deleteUser": "Supprimer l'utilisateur",
+  "deleteConfirm": "Êtes-vous sûr de vouloir supprimer {name}?",
+  "@deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "userDeletedSuccess": "Utilisateur supprimé avec succès",
+  "themeLight": "Thème Clair",
+  "themeDark": "Thème Sombre",
+  "themeSystem": "Thème Système"
+}

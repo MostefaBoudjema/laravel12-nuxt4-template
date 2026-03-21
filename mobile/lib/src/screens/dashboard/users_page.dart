@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../models/user.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
 
@@ -57,22 +59,23 @@ class _UsersPageState extends State<UsersPage> {
     final scope = AppScope.of(context);
     final token = scope.notifier!.token;
     if (token == null) return;
+    final loc = AppLocalizations.of(context)!;
 
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Delete user'),
-          content: Text('Are you sure you want to delete ${user.name}?'),
+          title: Text(loc.deleteUser),
+          content: Text(loc.deleteConfirm(user.name)),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               style: FilledButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Delete'),
+              child: Text(loc.delete),
             ),
           ],
         );
@@ -98,8 +101,12 @@ class _UsersPageState extends State<UsersPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    final settings = SettingsScope.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC), // slate-50
+      backgroundColor: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,19 +119,19 @@ class _UsersPageState extends State<UsersPage> {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        'System Users',
+                        loc.appTitle,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF1E293B), // slate-800
+                          color: isDark ? Colors.white : const Color(0xFF1E293B), // slate-800
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
-                        'Manage users',
-                        style: TextStyle(
+                        loc.manageUsers,
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Color(0xFF64748B), // slate-500
                         ),
@@ -133,30 +140,26 @@ class _UsersPageState extends State<UsersPage> {
                   ),
                   Row(
                     children: [
+                      PopupMenuButton<String>(
+                        icon: const Icon(Icons.language, color: Color(0xFF64748B)),
+                        onSelected: (val) => settings.updateLocale(Locale(val)),
+                        itemBuilder: (context) => const [
+                          PopupMenuItem(value: 'en', child: Text('English')),
+                          PopupMenuItem(value: 'fr', child: Text('Français')),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          settings.updateThemeMode(isDark ? ThemeMode.light : ThemeMode.dark);
+                        },
+                        icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode, color: const Color(0xFF64748B)),
+                      ),
                       IconButton(
                         onPressed: _loading ? null : _loadUsers,
                         icon: _loading 
                             ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
                             : const Icon(Icons.sync),
                         color: const Color(0xFF64748B),
-                      ),
-                      const SizedBox(width: 8),
-                      FilledButton.icon(
-                        style: FilledButton.styleFrom(
-                          backgroundColor: const Color(0xFF4F46E5), // indigo-600
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                        ),
-                        onPressed: () {
-                          // TODO: implement openAddDrawer equivalent
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Add User clicked')),
-                          );
-                        },
-                        icon: const Icon(Icons.add, size: 18),
-                        label: const Text('Add User'),
                       ),
                     ],
                   )
@@ -170,28 +173,30 @@ class _UsersPageState extends State<UsersPage> {
               child: TextField(
                 controller: _search,
                 onSubmitted: (_) => _loadUsers(),
-                style: const TextStyle(fontSize: 14),
+                style: TextStyle(fontSize: 14, color: isDark ? Colors.white : Colors.black),
                 decoration: InputDecoration(
-                  hintText: 'Search users...',
+                  hintText: loc.searchUsers,
                   hintStyle: const TextStyle(color: Color(0xFF94A3B8)),
                   prefixIcon: const Icon(Icons.search, color: Color(0xFF94A3B8), size: 20),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.close, color: Color(0xFF94A3B8), size: 18),
-                    onPressed: () {
-                      _search.clear();
-                      _loadUsers();
-                    },
-                  ),
+                  suffixIcon: _search.text.isNotEmpty 
+                    ? IconButton(
+                        icon: const Icon(Icons.close, color: Color(0xFF94A3B8), size: 18),
+                        onPressed: () {
+                          _search.clear();
+                          _loadUsers();
+                        },
+                      )
+                    : null,
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: isDark ? const Color(0xFF1E293B) : Colors.white,
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)), // slate-200
+                    borderSide: BorderSide(color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0)),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                    borderSide: BorderSide(color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0)),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -210,10 +215,10 @@ class _UsersPageState extends State<UsersPage> {
                   : _loading && _users.isEmpty
                       ? const Center(child: CircularProgressIndicator())
                       : _users.isEmpty
-                          ? const Center(
+                          ? Center(
                               child: Text(
-                                'No users found.',
-                                style: TextStyle(color: Color(0xFF94A3B8)),
+                                loc.noUsersFound,
+                                style: const TextStyle(color: Color(0xFF94A3B8)),
                               ),
                             )
                           : ListView.builder(
@@ -226,9 +231,9 @@ class _UsersPageState extends State<UsersPage> {
                                 return Container(
                                   margin: const EdgeInsets.only(bottom: 12),
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: isDark ? const Color(0xFF1E293B) : Colors.white,
                                     borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: const Color(0xFFF1F5F9)), // slate-100
+                                    border: Border.all(color: isDark ? const Color(0xFF334155) : const Color(0xFFF1F5F9)), 
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
@@ -241,15 +246,15 @@ class _UsersPageState extends State<UsersPage> {
                                             Container(
                                               width: 40,
                                               height: 40,
-                                              decoration: const BoxDecoration(
-                                                color: Color(0xFFE0E7FF), // indigo-100
+                                              decoration: BoxDecoration(
+                                                color: isDark ? const Color(0xFF312E81) : const Color(0xFFE0E7FF), 
                                                 shape: BoxShape.circle,
                                               ),
                                               alignment: Alignment.center,
                                               child: Text(
                                                 initials,
-                                                style: const TextStyle(
-                                                  color: Color(0xFF4338CA), // indigo-700
+                                                style: TextStyle(
+                                                  color: isDark ? const Color(0xFFA5B4FC) : const Color(0xFF4338CA), 
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -263,10 +268,10 @@ class _UsersPageState extends State<UsersPage> {
                                                 children: [
                                                   Text(
                                                     user.name,
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       fontSize: 15,
-                                                      color: Color(0xFF1E293B),
+                                                      color: isDark ? Colors.white : const Color(0xFF1E293B),
                                                     ),
                                                   ),
                                                   const SizedBox(height: 2),
@@ -286,7 +291,7 @@ class _UsersPageState extends State<UsersPage> {
                                               children: [
                                                 IconButton(
                                                   onPressed: () {
-                                                    // TODO: openEditDrawer equivalent
+                                                    // edit
                                                   },
                                                   icon: const Icon(Icons.edit_outlined, size: 20),
                                                   color: const Color(0xFF94A3B8),
@@ -294,7 +299,7 @@ class _UsersPageState extends State<UsersPage> {
                                                 IconButton(
                                                   onPressed: () => _confirmDelete(user),
                                                   icon: const Icon(Icons.delete_outline, size: 20),
-                                                  color: const Color(0xFF94A3B8), // slate-400 (hover effect handles the red in real life but we can leave it slate)
+                                                  color: const Color(0xFF94A3B8), 
                                                 ),
                                               ],
                                             ),
@@ -313,16 +318,16 @@ class _UsersPageState extends State<UsersPage> {
                                               children: user.roles.map((role) => Container(
                                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xFFEEF2FF), // indigo-50
+                                                  color: isDark ? const Color(0xFF312E81) : const Color(0xFFEEF2FF), 
                                                   borderRadius: BorderRadius.circular(12),
-                                                  border: Border.all(color: const Color(0xFFE0E7FF)), // indigo-100
+                                                  border: Border.all(color: isDark ? const Color(0xFF4338CA) : const Color(0xFFE0E7FF)), 
                                                 ),
                                                 child: Text(
                                                   role,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Color(0xFF4F46E5), // indigo-600
+                                                    color: isDark ? const Color(0xFFA5B4FC) : const Color(0xFF4F46E5),
                                                   ),
                                                 ),
                                               )).toList(),

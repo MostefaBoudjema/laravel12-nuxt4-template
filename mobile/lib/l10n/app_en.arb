@@ -1,0 +1,24 @@
+{
+  "@@locale": "en",
+  "appTitle": "System Users",
+  "manageUsers": "Manage users",
+  "searchUsers": "Search users...",
+  "addUser": "Add User",
+  "noUsersFound": "No users found.",
+  "refresh": "Refresh",
+  "deleteUser": "Delete user",
+  "deleteConfirm": "Are you sure you want to delete {name}?",
+  "@deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "userDeletedSuccess": "User deleted successfully",
+  "themeLight": "Light Theme",
+  "themeDark": "Dark Theme",
+  "themeSystem": "System Theme"
+}
